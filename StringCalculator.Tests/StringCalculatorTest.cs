@@ -23,9 +23,17 @@ namespace StringCalculator.Tests
         {
             var calculator = new StringCalculator();
 
-            var result = calculator.Add(input);
+            return calculator.Add(input);
+        }
 
-            return result;
+        [Test]
+        public void TwoNumbersSeparatedByCommaAreAddedTogether()
+        {
+            var calculator = new StringCalculator();
+
+            var result = calculator.Add("2,3");
+
+            Assert.That(result, Is.EqualTo(5));
         }
     }
 
@@ -33,9 +41,11 @@ namespace StringCalculator.Tests
     {
         public int Add(string number)
         {
-            if (String.IsNullOrEmpty(number)) return 0;
+            if (string.IsNullOrEmpty(number)) return 0;
 
-            return int.Parse(number);
+            var parts = number.Split(',');
+
+            return parts.Length == 1 ? int.Parse(number) : int.Parse(parts[0]) + int.Parse(parts[1]);
         }
     }
 }
