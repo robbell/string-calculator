@@ -16,14 +16,16 @@ namespace StringCalculator.Tests
             Assert.That(result, Is.EqualTo(0));
         }
 
-        [Test]
-        public void NumberStringReturnsIntegerEquivalent()
+        [TestCase("2", ExpectedResult = 2)]
+        [TestCase("5", ExpectedResult = 5)]
+        [TestCase("23", ExpectedResult = 23)]
+        public int NumberStringReturnsIntegerEquivalent(string input)
         {
             var calculator = new StringCalculator();
 
-            var result = calculator.Add("2");
+            var result = calculator.Add(input);
 
-            Assert.That(result, Is.EqualTo(2));
+            return result;
         }
     }
 
@@ -31,7 +33,7 @@ namespace StringCalculator.Tests
     {
         public int Add(string number)
         {
-            if(String.IsNullOrEmpty(number)) return 0;
+            if (String.IsNullOrEmpty(number)) return 0;
 
             return int.Parse(number);
         }
